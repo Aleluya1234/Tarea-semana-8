@@ -4,11 +4,12 @@ function Pomodoro() {
   const [tiempo, setTiempo] = useState(25 * 60)
   const [activo, setActivo] = useState(false)
   const [sesiones, setSesiones] = useState(0)
+  const [pausado, setPausado] = useState(false)
 
   useEffect(() => {
     let interval = null
 
-    if (activo && tiempo > 0) {
+    if (activo && !pausado && tiempo > 0) {
       interval = setInterval(() => {
         setTiempo(prev => prev - 1)
       }, 1000)
@@ -18,12 +19,19 @@ function Pomodoro() {
     }
 
     return () => clearInterval(interval)
-  }, [activo, tiempo])
+  }, [activo, pausado, tiempo])
 
-  const iniciar = () => setActivo(true)
-  const pausar = () => setActivo(false)
+  const iniciar = () => {
+    setActivo(true)
+    setPausado(false)
+  }
+  
+  const pausar = () => setPausado(true)
+  const reanudar = () => setPausado(false)
+  
   const reiniciar = () => {
     setActivo(false)
+    setPausado(false)
     setTiempo(25 * 60)
   }
 
@@ -32,21 +40,40 @@ function Pomodoro() {
 
   return (
     <div>
-      <h2>Contador Pomodoro</h2>
+      <h2 style={{ borderBottom: '2px solid #3182ce', paddingBottom: '0.5rem' }}>
+        Contador Pomodoro
+      </h2>
       
-      <div style={{ fontSize: '3rem', margin: '2rem 0' }}>
-        {String(minutos).padStart(2, '0')}:{String(segundos).padStart(2, '0')}
-      </div>
+      <div style={{
+        backgroundColor: '#edf2f7',
+        padding: '2rem',
+        borderRadius: '8px',
+        textAlign: 'center',
+        marginTop: '1rem'
+      }}>
+        <div style={{ fontSize: '4rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+          {String(minutos).padStart(2, '0')}:{String(segundos).padStart(2, '0')}
+        </div>
 
-      <div>
-        <button onClick={iniciar} disabled={activo}>Iniciar</button>
-        <button onClick={pausar} disabled={!activo}>Pausar</button>
-        <button onClick={reiniciar}>Reiniciar</button>
-      </div>
+        <div>
+          {!activo && (
+            <button onClick={iniciar}>Iniciar</button>
+          )}
+          {activo && !pausado && (
+            <button onClick={pausar}>Pausar</button>
+          )}
+          {activo && pausado && (
+            <button onClick={reanudar}>Reanudar</button>
+          )}
+          <button onClick={reiniciar} style={{ backgroundColor: '#718096' }}>
+            Reiniciar
+          </button>
+        </div>
 
-      <p style={{ marginTop: '1rem' }}>
-        Sesiones completadas: {sesiones}
-      </p>
+        <p style={{ marginTop: '1rem' }}>
+          <strong>Sesiones completadas:</strong> {sesiones}
+        </p>
+      </div>
     </div>
   )
 }

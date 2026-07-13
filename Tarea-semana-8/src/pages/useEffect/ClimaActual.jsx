@@ -5,7 +5,9 @@ function ClimaActual() {
     temperatura: null,
     ciudad: 'Santiago',
     pais: 'CL',
-    descripcion: 'Cargando...'
+    descripcion: 'Cargando...',
+    humedad: null,
+    viento: null
   })
 
   useEffect(() => {
@@ -14,7 +16,9 @@ function ClimaActual() {
         temperatura: 18,
         ciudad: 'Santiago',
         pais: 'CL',
-        descripcion: 'Nublado'
+        descripcion: 'Nublado',
+        humedad: '65%',
+        viento: '12 km/h'
       })
     }, 1000)
 
@@ -23,15 +27,24 @@ function ClimaActual() {
 
   return (
     <div>
-      <h2>Clima Actual</h2>
+      <h2 style={{ borderBottom: '2px solid #3182ce', paddingBottom: '0.5rem' }}>
+        Clima Actual
+      </h2>
       
       {clima.temperatura === null ? (
         <p>Cargando datos del clima...</p>
       ) : (
-        <div>
+        <div style={{
+          backgroundColor: '#edf2f7',
+          padding: '1.5rem',
+          borderRadius: '8px',
+          marginTop: '1rem'
+        }}>
           <p><strong>Temperatura:</strong> {clima.temperatura}°C</p>
           <p><strong>Ciudad:</strong> {clima.ciudad}, {clima.pais}</p>
           <p><strong>Descripción:</strong> {clima.descripcion}</p>
+          <p><strong>Humedad:</strong> {clima.humedad}</p>
+          <p><strong>Viento:</strong> {clima.viento}</p>
         </div>
       )}
     </div>
