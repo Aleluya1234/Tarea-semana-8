@@ -4,25 +4,31 @@ function Layout() {
   return (
     <div>
       <nav style={{
-        padding: '1rem',
-        backgroundColor: '#333',
+        padding: '0.75rem 2rem',
+        backgroundColor: '#1a202c',
         color: 'white',
-        marginBottom: '2rem'
+        marginBottom: '2rem',
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: '0.5rem',
+        alignItems: 'center'
       }}>
-        <Link to="/" style={{ color: 'white', marginRight: '1rem' }}>Inicio</Link>
-        <span>|</span>
-        <Link to="/clima" style={{ color: 'white', marginLeft: '1rem' }}>Clima</Link>
-        <Link to="/chat" style={{ color: 'white', marginLeft: '1rem' }}>Chat</Link>
-        <Link to="/pomodoro" style={{ color: 'white', marginLeft: '1rem' }}>Pomodoro</Link>
-        <Link to="/feed" style={{ color: 'white', marginLeft: '1rem' }}>Feed</Link>
-        <Link to="/tips" style={{ color: 'white', marginLeft: '1rem' }}>Tips</Link>
-        <span style={{ marginLeft: '1rem' }}>|</span>
-        <Link to="/blog" style={{ color: 'white', marginLeft: '1rem' }}>Blog</Link>
-        <Link to="/tienda" style={{ color: 'white', marginLeft: '1rem' }}>Tienda</Link>
-        <Link to="/dashboard" style={{ color: 'white', marginLeft: '1rem' }}>Dashboard</Link>
-        <Link to="/reservas" style={{ color: 'white', marginLeft: '1rem' }}>Reservas</Link>
+        <Link to="/" style={{ color: 'white', fontWeight: 'bold', marginRight: '1rem' }}>
+          Inicio
+        </Link>
+        <span style={{ color: '#4a5568' }}>|</span>
+        <Link to="/clima" style={{ color: '#a0aec0' }}>Clima</Link>
+        <Link to="/chat" style={{ color: '#a0aec0' }}>Chat</Link>
+        <Link to="/pomodoro" style={{ color: '#a0aec0' }}>Pomodoro</Link>
+        <Link to="/feed" style={{ color: '#a0aec0' }}>Feed</Link>
+        <Link to="/tips" style={{ color: '#a0aec0' }}>Tips</Link>
+        <span style={{ color: '#4a5568' }}>|</span>
+        <Link to="/blog" style={{ color: '#a0aec0' }}>Blog</Link>
+        <Link to="/tienda" style={{ color: '#a0aec0' }}>Tienda</Link>
+        <Link to="/dashboard" style={{ color: '#a0aec0' }}>Dashboard</Link>
+        <Link to="/reservas" style={{ color: '#a0aec0' }}>Reservas</Link>
       </nav>
-      <main style={{ padding: '0 2rem' }}>
+      <main style={{ padding: '0 2rem', maxWidth: '1200px', margin: '0 auto' }}>
         <Outlet />
       </main>
     </div>
